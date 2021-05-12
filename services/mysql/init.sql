@@ -1,0 +1,6 @@
+CREATE DATABASE IF NOT EXISTS dfwitb-db;
+
+CREATE USER 'symfony'@'%' IDENTIFIED BY 'dfwitb2021symfony';
+GRANT ALL PRIVILEGES ON dfwitb-db.* TO 'symfony'@'%';
+
+FLUSH PRIVILEGES;
