@@ -4,7 +4,7 @@
 
 echo -e "\n- Start doctrine migration"
 
-cd /app
+cd /var/www/symfony
 php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
 
 echo -e "\n- Symfony is ready !"

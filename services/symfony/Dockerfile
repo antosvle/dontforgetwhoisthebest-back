@@ -1,20 +1,13 @@
-FROM php:8-fpm-alpine
+FROM php:8-apache
 
 
-RUN apt-get update -y
-RUN apt-get install -y software-properties-common
-RUN apt-get install -y apache2
-
-
-# Get composer from offcial composer image
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer \
-        | php -- --install-dir=/usr/local/bin --filename=composer
+# Add some tools to image
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends locales apt-utils git libicu-dev g++ libpng-dev libxml2-dev libzip-dev libonig-dev libxslt-dev;
 
 
 # Configure Apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-RUN a2dissite *default
 COPY ./services/symfony/conf/symfony-vh.conf /etc/apache2/sites-available/symfony-vh.conf
 COPY ./services/symfony/conf/apache.conf /etc/apache2/conf-available/z-app.conf
 RUN a2enmod rewrite remoteip \
@@ -22,19 +15,26 @@ RUN a2enmod rewrite remoteip \
     && a2ensite symfony-vh.conf
 
 
-# Install Symfony dependencies
-WORKDIR /app
+# Install composer
+RUN curl -sS https://getcomposer.org/installer \
+        | php -- --install-dir=/usr/local/bin --filename=composer
+
+
+# Install some PHP plugins
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstring zip gd xsl
+
+
+# Install project dependencies
+WORKDIR /var/www
 COPY ./app/composer.* ./
 RUN composer install --prefer-dist --optimize-autoloader && composer clear-cache
 
 
-# Download and launch waiter script to wait after the database
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /usr/bin/wait
+# Download and configure waiter script to wait after the database
+WORKDIR /
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
 RUN chmod +x /wait
-
-
-# Environment variable
-ENV GLOBAL_ENV=dev 
 
 
 # Clean image
@@ -42,9 +42,12 @@ RUN apt-get clean \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
+# Configure entry point
 COPY ./services/symfony/docker-entrypoint.sh ./
 RUN chmod 755 /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
 
 CMD apachectl -D FOREGROUND
 EXPOSE 80
