@@ -21,6 +21,7 @@ services:
         volumes:
             - "./app:/var/www/symfony"
             - /var/www/symfony/vendor
+            - /var/www/symfony/var
         environment: 
             WAIT_HOSTS: "database:3306"
         ports:
