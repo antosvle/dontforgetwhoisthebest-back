@@ -9,9 +9,8 @@ RUN apt-get update \
 # Configure Apache
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 COPY ./services/symfony/conf/symfony-vh.conf /etc/apache2/sites-available/symfony-vh.conf
-COPY ./services/symfony/conf/apache.conf /etc/apache2/conf-available/z-app.conf
 RUN a2enmod rewrite remoteip \
-    && a2enconf z-app \
+    && a2dissite 000-default.conf \
     && a2ensite symfony-vh.conf
 
 
@@ -26,8 +25,8 @@ RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstri
 
 
 # Install project dependencies
-WORKDIR /var/www
-COPY ./app/composer.* ./
+WORKDIR /var/www/symfony
+COPY ./app/composer.* .
 RUN composer install --prefer-dist --optimize-autoloader && composer clear-cache
 
 
