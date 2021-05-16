@@ -20,7 +20,7 @@ services:
             context: ./
             dockerfile: ./services/symfony/Dockerfile
         volumes:
-            - "./app:/var/www/symfony"
+            - "./apps/symfony:/var/www/symfony"
             - /var/www/symfony/vendor
             - /var/www/symfony/var
         environment: 
@@ -31,3 +31,11 @@ services:
             - .env
         depends_on:
             - database
+
+    scraper: 
+        container_name: dfwitb-scraper
+        build:
+            context: ./
+            dockerfile: ./services/scraper/Dockerfile
+        ports:
+            - "8000:80"

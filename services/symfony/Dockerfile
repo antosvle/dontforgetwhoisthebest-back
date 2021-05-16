@@ -26,7 +26,7 @@ RUN docker-php-ext-install pdo pdo_mysql gd opcache intl zip calendar dom mbstri
 
 # Install project dependencies
 WORKDIR /var/www/symfony
-COPY ./app/composer.* .
+COPY ./apps/symfony/composer.* .
 RUN composer install --prefer-dist --optimize-autoloader && composer clear-cache
 
 

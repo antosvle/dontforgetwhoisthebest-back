@@ -1,0 +1,5 @@
+vendor
+build
+.dockerignore
+Dockerfile
+conf
