@@ -4,8 +4,11 @@ async function startBrowser(){
     let browser;
     try {
         browser = await puppeteer.launch({
-            headless: false,
-            args: ["--disable-setuid-sandbox"],
+            headless: true,
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox'
+            ],
             'ignoreHTTPSErrors': true
         });
     } catch (err) {

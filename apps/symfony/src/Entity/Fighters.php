@@ -27,12 +27,12 @@ class Fighters
     private $name;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $img;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $icon;
 
@@ -40,6 +40,11 @@ class Fighters
      * @ORM\OneToMany(targetEntity=Selections::class, mappedBy="fighter")
      */
     private $selections;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $page;
 
     public function __construct()
     {
@@ -63,7 +68,7 @@ class Fighters
         return $this;
     }
 
-    public function getImg()
+    public function getImg(): ?string
     {
         return $this->img;
     }
@@ -75,7 +80,7 @@ class Fighters
         return $this;
     }
 
-    public function getIcon()
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
@@ -113,6 +118,18 @@ class Fighters
                 $selection->setFighter(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPage(): ?string
+    {
+        return $this->page;
+    }
+
+    public function setPage(?string $page): self
+    {
+        $this->page = $page;
 
         return $this;
     }

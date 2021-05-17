@@ -37,7 +37,7 @@ const fighterScraper = {
 
 
         // For each fighter, we need to query its personal page to get more data
-        for(index in fighters_data){
+       /* for(index in fighters_data){
             // Generate a new page for the current fighter with its personal url
             const fighter_page = await browser.newPage();
             await fighter_page.goto(fighters_data[index].page);
@@ -46,7 +46,8 @@ const fighterScraper = {
             fighters_data[index].img_large_url = await fighter_page.$eval('.fighter-main__item img', (el) => el.src)
             fighters_data[index].background_url = "https://www.smashbros.com" + await fighter_page.$eval('.fighter-bg__img', (el) => el.style.backgroundImage.split('"')[1])
             await fighter_page.close();
-        }
+            console.log(fighters_data[index])
+        }*/
 
         return fighters_data
     }

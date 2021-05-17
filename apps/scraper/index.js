@@ -17,7 +17,7 @@ app.get('/scraper/fighters', (req, res) => {
   const browserInstance = browserObject.startBrowser();
   scrapeFighters(browserInstance)
     .then((data) => res.json(data))
-    .catch((err) => res.status(500).end())
+    .catch((err) => res.status(500).end(err))
 });
 
 app.listen(PORT, HOST);

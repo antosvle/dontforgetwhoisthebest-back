@@ -12,10 +12,14 @@ use Symfony\Component\HttpFoundation\Request;
 class AppController extends AbstractController
 {
     /**
-     * @Route("/", name="app_index")
+     * @Route("/", name="app_index", methods={"GET","HEAD"})
      */
     public function index(): Response
     {
-        return $this->render('app.html.twig');
+        return new Response(
+            "<h1>Bienvenue sur l'API Symfony DFWITB.</h1>", 
+            Response::HTTP_OK, 
+            ["Content-type" => "text/html"]
+        );
     }
 }

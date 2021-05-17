@@ -38,4 +38,4 @@ services:
             context: ./
             dockerfile: ./services/scraper/Dockerfile
         ports:
-            - "8000:80"
+            - "7000:80"
