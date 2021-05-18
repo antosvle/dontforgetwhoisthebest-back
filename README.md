@@ -29,6 +29,7 @@ cd ./dontforgetwhoisthebest-front
 docker build -t dfwitb-react:dev .
 docker run -it -p 3000:3000 --rm dfwitb-react:dev -d
 ```
+> You can also inject an "BACKEND_URL" environment variable (ex: 'http://mybackend') inside the container if you want to deploy the environment elsewhere than locally. By default, the React app will use 'http://localhost' to join the API. 
 
 &nbsp;
 ### Ready to go on http://localhost:3000 !
