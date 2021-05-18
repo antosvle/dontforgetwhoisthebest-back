@@ -1,5 +1,5 @@
 # dontforgetwhoisthebest-back
-Dontforgetwhoisthebest (ou DFWITB) est l'application idéal pour prouver ta supériorité face à ton entourage sur Super Smash Bros. Tu souhaites prouver, humilier, enregistrer, partager à partir de tes résultats en combat ? Tu es sur le bon Readme. Dontforgetwhoisthebest te propose un outils permettant d'enregistrer tes performances à partir de toutes les informations du combat vers un leaderboard débordant de fonctionnalité. 
+Dontforgetwhoisthebest (ou DFWITB) est l'application idéale pour prouver ta supériorité face à ton entourage sur Super Smash Bros. Tu souhaites prouver, humilier, enregistrer, partager à partir de tes résultats en combat ? Tu es sur le bon Readme. Dontforgetwhoisthebest te propose un outils permettant d'enregistrer tes performances à partir de toutes les informations du combat vers un leaderboard débordant de fonctionnalité. 
 >  "dontforgetwhoisthebest-back" contient le backend de l'outils. Il consiste en un docker-compose comportant une base MySQL, un serveur web Symfony et un scrapper nodejs.
 
 &nbsp;
@@ -7,6 +7,7 @@ Dontforgetwhoisthebest (ou DFWITB) est l'application idéal pour prouver ta sup�
 > Let's start by creating a folder for the environment. 
 ```sh
 mkdir dontforgetwhoisthebest
+cd dontforgetwhoisthebest
 ```
 
 &nbsp;
