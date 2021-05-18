@@ -14,7 +14,6 @@ cd dontforgetwhoisthebest
 ### Back setup:
 > For the back, just clone the projet, move inside and run the following docker-compose command.
 ```sh
-cd ..
 git clone https://github.com/antosvle/dontforgetwhoisthebest-back
 cd ./dontforgetwhoisthebest-back
 docker-compose up --build -d
@@ -26,6 +25,7 @@ docker-compose up --build -d
 ### Front setup:
 > Finaly, clone the front projet, move inside and again, run the following docker commands.
 ```sh
+cd ..
 git clone https://github.com/antosvle/dontforgetwhoisthebest-front
 cd ./dontforgetwhoisthebest-front
 docker build -t dfwitb-react:dev .
