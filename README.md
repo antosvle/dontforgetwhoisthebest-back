@@ -14,11 +14,13 @@ cd dontforgetwhoisthebest
 ### Back setup:
 > For the back, just clone the projet, move inside and run the following docker-compose command.
 ```sh
+cd ..
 git clone https://github.com/antosvle/dontforgetwhoisthebest-back
 cd ./dontforgetwhoisthebest-back
 docker-compose up --build -d
 ```
 > You can also customize some parameter inside the ".env" file (I know, it's ugly but easier to setup the env quickly).
+> The API should be accessible from http://localhost, and the scraper from http://localhost:7000.
 
 &nbsp;
 ### Front setup:
