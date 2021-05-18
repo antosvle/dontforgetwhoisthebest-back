@@ -5,14 +5,17 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ScoresRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ScoresRepository::class)
  */
-#[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['score']])]
 class Scores
 {
     /**
+     * @Groups({"score"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,23 +23,28 @@ class Scores
     private $id;
 
     /**
+     * @Groups({"score"})
+     * @MaxDepth(2)
      * @ORM\ManyToOne(targetEntity=Selections::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $winner;
 
     /**
+     * @Groups({"score"})
      * @ORM\ManyToOne(targetEntity=Selections::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $looser;
 
     /**
+     * @Groups({"score"})
      * @ORM\ManyToOne(targetEntity=Stages::class, inversedBy="scores")
      */
     private $stage;
 
     /**
+     * @Groups({"score"})
      * @ORM\Column(type="date")
      */
     private $creation_date;

@@ -7,6 +7,8 @@ use App\Repository\PlayersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=PlayersRepository::class)
@@ -18,16 +20,19 @@ class Players
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"score"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"score"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"score"})
      */
     private $creation_date;
 

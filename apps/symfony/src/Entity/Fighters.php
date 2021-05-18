@@ -7,6 +7,8 @@ use App\Repository\FightersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=FightersRepository::class)
@@ -18,21 +20,25 @@ class Fighters
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"score"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"score"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"score"})
      */
     private $img;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"score"})
      */
     private $icon;
 
@@ -43,6 +49,7 @@ class Fighters
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"score"})
      */
     private $page;
 

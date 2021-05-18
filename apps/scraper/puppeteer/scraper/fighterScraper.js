@@ -22,8 +22,8 @@ const fighterScraper = {
 
                 if(name !== '') return {
                     'name': name,
-                    'img_url': "https://www.smashbros.com" + profile_url,
-                    'icon_url': "https://www.smashbros.com" + icon_root.getAttributeNS('http://www.w3.org/1999/xlink', 'href'),
+                    'img': "https://www.smashbros.com" + profile_url,
+                    'icon': "https://www.smashbros.com" + icon_root.getAttributeNS('http://www.w3.org/1999/xlink', 'href'),
                     'page': page,
                 }
             })

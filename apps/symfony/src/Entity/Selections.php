@@ -5,6 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SelectionsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=SelectionsRepository::class)
@@ -16,18 +18,21 @@ class Selections
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"score"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Players::class, inversedBy="selections")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"score"})
      */
     private $player;
 
     /**
      * @ORM\ManyToOne(targetEntity=Fighters::class, inversedBy="selections")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"score"})
      */
     private $fighter;
 

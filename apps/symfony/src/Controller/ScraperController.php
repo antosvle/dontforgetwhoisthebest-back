@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Entity\Fighters;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 
 /**
@@ -43,8 +47,8 @@ class ScraperController extends AbstractController
                     // Create new fighter entity from scraper's data
                     $fighter = new Fighters();
                     $fighter->setName($fighter_data->name);
-                    $fighter->setImg($fighter_data->img_url);
-                    $fighter->setIcon($fighter_data->icon_url);
+                    $fighter->setImg($fighter_data->img);
+                    $fighter->setIcon($fighter_data->icon);
                     $fighter->setPage($fighter_data->page);
     
                     // Test if fighter already exist
@@ -53,9 +57,13 @@ class ScraperController extends AbstractController
                 }
     
                 $this->entityManager->flush();
+
+                $encoders = [new XmlEncoder(), new JsonEncoder()];
+                $normalizers = [new ObjectNormalizer()];
+                $serializer = new Serializer($normalizers, $encoders);
     
                 return new Response(
-                    $scraperResponse->getContent(), 
+                    $serializer->serialize($this->entityManager->getRepository(Fighters::class)->findAll(), 'json'), 
                     Response::HTTP_OK,
                     ["Content-type" => "application/json"]
                 );
